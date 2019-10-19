@@ -1,0 +1,5 @@
+StudentID  FirstName  LastName  Email
+  Grade Items
+  GradeItemID  CourseID  Type  Date  Maximum Score   Actual Score    Grade (%)*
+===================================================================================
+  Total                           SumOfMaxScore   SumActualScore    Grade (%)
