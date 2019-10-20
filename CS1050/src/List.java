@@ -36,17 +36,40 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
 		return true;
 	}
     
- public boolean add (T newItem, int position) {
-   
- 	return false;
-}
+    /**
+     * Adds a new entry to this collection at the given position
+     * 
+     * @param newItem The object to be added to the collection
+     * @param position The location where newItem will be inserted.
+     * @return True if the addition is successful, or false if not.
+     */
+    public boolean add (T newItem, int position) {
+    	Node current = head;
+    	int count = 0;
+    	while (current.next != null) {
+    		current = current.next;
+    		count += 1;
+    		if (count == position) {
+//    			current.next = new Node (newItem);
+//    			current.next.next = current.next;
+
+    			
+    		}
+    			
+    			
+    		
+    		
+    		
+    	}
+    
+    }
  
- /**
-  * Removes one occurrence of a given entry from this collection.
-  *
-  * @param anEntry The entry to be removed.
-  * @return True if the removal was successful, or false if not.
-  */
+ 	/**
+ 	 * Removes one occurrence of a given entry from this collection.
+ 	 *
+ 	 * @param anEntry The entry to be removed.
+ 	 * @return True if the removal was successful, or false if not.
+ 	 */
     public boolean remove (T anEntry) {
 		Node current = head;
 		while (current.next != null) {
