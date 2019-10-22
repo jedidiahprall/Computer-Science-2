@@ -49,7 +49,7 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
     	while (current.next != null) {
     		current = current.next;
     		count += 1;
-    		if (count == position) {
+    		if (count == position) {sdfs
 //    			current.next = new Node (newItem);
 //    			current.next.next = current.next;
 
