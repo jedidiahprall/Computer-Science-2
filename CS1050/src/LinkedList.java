@@ -13,7 +13,6 @@
 
 public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
 	private Node<T> head;
-	private int listCount = 0;
 	private Node<T> currentNode = head;
 	private Node<T> nodeBefore;
 	private Node<T> nodeAfter;
@@ -107,7 +106,7 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
         if(currentNode.getData().equals(anEntry)){
            head = currentNode.getNextNode();
            result = true;
-           listCount--;
+           numberOfEntries--;
         }
         else{
            try{
@@ -118,7 +117,7 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
                  
               }
               if(currentNode != null){
-                 listCount--;
+                 numberOfEntries--;
                  result = true;
                  nodeBefore.setNextNode(nodeAfter);
                  currentNode.setNextNode(null);
@@ -155,8 +154,9 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
      * @return The integer number of entries currently in the collection.
      */
 
-	public int getCurrentSize() {
+	public int getCurrentSize() { 
 		Node <T> current = head;
+		int listCount=0;
     	while (current.next != null) {
     		listCount +=1;
     		current = current.next;		
@@ -172,7 +172,7 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
      * @return True if the collection is empty, or false if not.
      */
 	
-	public boolean isEmpty() {
+	public boolean isEmpty() { //this
 		result = false;
 		
 		if(numberOfEntries==0) {
@@ -189,8 +189,9 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
      * @return The number of times anEntry appears in the collection.
      */
 	
-	public int getFrequencyOf(T anEntry) {
+	public int getFrequencyOf(T anEntry) { //this
 		Node<T> currentNode = new Node<T> (anEntry);
+		int listCount=0;
 		for(int i = 0; i<= numberOfEntries; i++) {
 			if(anEntry.equals(currentNode.getData())) {
 				listCount++;

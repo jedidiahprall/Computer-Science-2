@@ -2,22 +2,26 @@
 
 /**
  *A list class that implements MyCollectinoInterface for project 4 
- *Calvin Nguyen and 
+ *Calvin Nguyen and Osman
  *list class
  *Eclipse Java IDE
  *fulminate: denounce forcefully.
  *"You can't make decisions based on fear and the possibility of what might happen." - Michelle Obama, (1.1964)
- *@author Calvin Nguyen and Nestor Ayla
- *@version project 3 
- *@class CalvinNguyen_03
+ *@author Calvin Nguyen and Osman
+ *@version project 4 
+ *@class CalvinNguyen_04
  */
 
 
-public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
-	Node head;
-	Node tail;
-	Node curr;
-	int listCount;
+public class List<T> implements MyCollectionInterfaceProject04<T>{
+	Node<T> head;
+	Node<T> tail;
+	int listCount = 0;
+	Node<T> current = head;
+	Node<T> nodeBefore;
+	Node<T> nodeAfter;
+	
+//************************************************************************* 	
 	/**
      * Adds a new entry to this collection
      * 
@@ -26,15 +30,16 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
      */
     public boolean add(T newItem) {
     	if (head==null) {
-    		head = new Node(newItem);
+    		head = new Node<T>(newItem);
     	}
-		Node current = head;
 		while (current.next != null) {
 			current = current.next;
 		}
-		current.next= new Node(newItem);
+		current.next= new Node<T>(newItem);
 		return true;
 	}
+    
+//*************************************************************************  
     
     /**
      * Adds a new entry to this collection at the given position
@@ -44,26 +49,41 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
      * @return True if the addition is successful, or false if not.
      */
     public boolean add (T newItem, int position) {
-    	Node current = head;
-    	int count = 0;
-    	while (current.next != null) {
-    		current = current.next;
-    		count += 1;
-    		if (count == position) {sdfs
-//    			current.next = new Node (newItem);
-//    			current.next.next = current.next;
-
-    			
-    		}
-    			
-    			
-    		
-    		
-    		
-    	}
+    	boolean result = false;
+        Node newNode = new Node(newItem);
+        nodeBefore = null;
+        nodeAfter = null;
+        int counter = 0;
+           if((position >= 1) && (position <= listCount + 1) ){
+           
+              if(position == 1){
+              current.setNextNode(newNode);
+              head = current;
+              result = true; 
+              listCount++;
+              }
+         
+              else{
+                 
+                    while(position != counter){
+                       current = current.getNextNode();
+                       counter++;
+                       nodeBefore = current;
+                       current = current.getNextNode();
+                       nodeAfter = current;
+                       result = true;
+                 }
+              }
+           }
+           else{
+              throw new IndexOutOfBoundsException(
+                 "Position is not in bounds"); 
+           }
+       return result;
+   } // End of method
     
-    }
- 
+ //*************************************************************************
+    
  	/**
  	 * Removes one occurrence of a given entry from this collection.
  	 *
@@ -71,23 +91,55 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
  	 * @return True if the removal was successful, or false if not.
  	 */
     public boolean remove (T anEntry) {
-		Node current = head;
-		while (current.next != null) {
-			current = current.next;
-			if (current.next.data==anEntry) {
-				current=current.next.next;
-				return true;
-			}
-		}
-		return false;
-    }
+		
+        boolean result = false;
+        current = head;
+        nodeBefore = null;
+        nodeAfter = null;
+        try{
+        if(isEmpty()){
+           throw new IllegalArgumentException("List is empty");
+        }
+        nodeAfter = head.getNextNode();
+        if(current.getData().equals(anEntry)){
+           head = current.getNextNode();
+           result = true;
+           listCount--;
+        }
+        else{
+           try{
+              while(current != null && !current.getData().equals(anEntry)){
+                 nodeBefore = current;
+                 current = current.getNextNode();
+                 nodeAfter = current.getNextNode();
+                 
+              }
+              if(current != null){
+                 listCount--;
+                 result = true;
+                 nodeBefore.setNextNode(nodeAfter);
+                 current.setNextNode(null);
+              }
+            }
+            catch(NullPointerException e){
+              System.err.println("Node is null");
+            }
+         }
+        }
+        catch(IllegalArgumentException e){
+        System.err.println("No item found in list");
+        }    
+        return result;
+   } // End of method
     
+ //*************************************************************************    
     /**
      * Removes all entries from this collection.
      */
-    
+  
     public void clear() {
     	head = null;
+    	listCount = 0;
     	
     }
     
@@ -98,15 +150,15 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
      * @return The integer number of entries currently in the collection.
      */
     public int getCurrentSize() {
-    	int size =0;
     	Node current = head;
     	while (current.next != null) {
-    		size +=1;
+    		listCount +=1;
     		current = current.next;		
     	}
-    	return size;
+    	return listCount;
     }
     
+//*************************************************************************  
     
     /**
      * Check to see if the collection is empty.
@@ -119,7 +171,7 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
     	}
     	return false;
     }
-    
+//*************************************************************************     
     /**
      * Counts the number of times a given entry appears in this collection.
      *
@@ -138,6 +190,8 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
     	return frequency;
     }
     
+//************************************************************************* 
+    
     /**
      * Tests whether this collection contains a given entry.
      *
@@ -147,7 +201,7 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
     public boolean contains (T anEntry) {
     	Node current = head;
     	while (current.next != null) {
-    		if (current.next.data == anEntry) {
+    		if (current.getData() == anEntry) {
     			current = current.next;	
     			return true;
     			
@@ -155,18 +209,27 @@ public abstract class List<T> implements MyCollectionInterfaceProject04<T>{
     	}
     	return false;
     }
+    
+ //************************************************************************* 
    
-//
-//    /**
-//     * Retrieves all entries that are in this collection.
-//     *
-//     * @return A newly allocated array of all the entries in the collection. 
-//     * Note: If the collection is empty, the returned array is empty.
-//     */
-//    public Object[] toArray () {
-//    	return 1;
-//    }
-
+    /**
+     * Retrieves all entries that are in this collection.
+     *
+     * @return A newly allocated array of all the entries in the collection. 
+     * Note: If the collection is empty, the returned array is empty.
+     */
+    public Object[] toArray () {
+    	 Object[] array =  new Object[listCount];
+         int index = 0;
+         Node current = head;
+         while((index < listCount) && (current != null)){
+            array[index] = current.getData();
+            current = current.getNextNode();
+            index++;
+         }
+         return array;   
+       
+       } // End of method
 
 
  }
