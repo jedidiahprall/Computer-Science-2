@@ -1,0 +1,21 @@
+StudentID  FirstName  LastName  Email
+  Grade Items
+  GradeItemID  CourseID  Type  Date  Maximum Score   Actual Score    Grade (%)*
+===================================================================================
+  Total                           SumOfMaxScore   SumActualScore    Grade (%)
+
+900123457    Joe    Doe   joedoe@msudenver.edu 
+   Grade Items
+   3	23456	Test    	20190112	500	345
+   2	23456	Class Work	20190112	100	95
+   1	23456	HW      	20190113	100	75
+======================================================================================
+	Total                                   700	515	73.6% 
+
+900123451     Mary    Smith   marysmith@msudenver.edu
+   Grade Items
+   3	12346	Test    	20190112	500	345
+   2	12346	Class Work	20190112	100	75
+   1	12346	HW      	20190112	100	95
+======================================================================================
+	Total                                   700	515	73.6% 
