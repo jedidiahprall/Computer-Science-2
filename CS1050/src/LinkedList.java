@@ -1,7 +1,7 @@
 /**
- *A linked list class that implements MyCollectinoInterface for project 4 
+ *A linked list class that implements MyCollectionInterface for project 4 
  *Calvin Nguyen and Osman Rakhimov
- *list class
+ *Linked List class
  *Eclipse Java IDE
  *insouciant:showing a casual lack of concern; indifferent.
  *"Life begin at the end of your Comfort Zone. So if you`re feeling uncomfortable right now, 
@@ -11,9 +11,8 @@
  *@class LinkedList
  */
 
-public class LinkedList<T> {
+public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
 	private Node<T> head;
-	private Node<T> tail;
 	private int listCount = 0;
 	private Node<T> currentNode = head;
 	private Node<T> nodeBefore;

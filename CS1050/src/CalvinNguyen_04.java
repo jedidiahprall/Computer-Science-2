@@ -23,14 +23,14 @@ public class CalvinNguyen_04 {
 
 		private static LinkedList<Student> listOfStudents;
 		private static LinkedList<GradeItem> listOfGradeItems;
-		final static String INPUT_FILE = "Project_04_Input01.txt";
-		final static String OUTPUT_FILE = "Project_04_Output01.txt";
+		final static String INPUT_FILE = "Project_04_Input02.txt";
+		final static String OUTPUT_FILE = "Project_04_Output02.txt";
 		private static String[] splitter;
 		private static PrintWriter output; // Output
 		private static Student student; // Student 2
 		private static GradeItem gradeItem; // Grade Item 1
 
-	/************************************************************************************************************/
+/************************************************************************************************************/
 
 		public static void main(String[] args) throws IOException {
 			
@@ -47,7 +47,7 @@ public class CalvinNguyen_04 {
 
 		}
 
-	/************************************************************************************************************/
+/************************************************************************************************************/
 		// Start of processInput method
 		/**
 		 * processInput method scans the input file and uses the split method to split 
@@ -58,7 +58,7 @@ public class CalvinNguyen_04 {
 		
 		
 		public static void processInput() throws IOException {
-			File INPUT_FILE = new File("Project_04_Input01.txt"); // Importing the file.
+			File INPUT_FILE = new File("Project_04_Input02.txt"); // Importing the file.
 
 			Scanner scan;
 			String t1 = "";
@@ -102,7 +102,7 @@ public class CalvinNguyen_04 {
 			
 		} // End of processInput method
 
-	/************************************************************************************************************/
+/************************************************************************************************************/
 		// Start of processStudentData method
 
 		/**
@@ -182,7 +182,7 @@ public class CalvinNguyen_04 {
 
 		// End of processStudentData method
 
-	/************************************************************************************************************/
+/************************************************************************************************************/
 
 		// Start of porcessGradeItemData method
 
@@ -256,7 +256,7 @@ public class CalvinNguyen_04 {
 
 		// End of test 2b method
 
-	/************************************************************************************************************/
+/************************************************************************************************************/
 		
 		// Start of generateReport method
 		
@@ -276,7 +276,7 @@ public class CalvinNguyen_04 {
 
 			Object[] gradeItemObjects = listOfGradeItems.toArray();
 
-			File OUTPUT_FILE = new File("Project_04_Output01.txt");     // Generates report to output file
+			File OUTPUT_FILE = new File("Project_04_Output02.txt");     // Generates report to output file
 			System.out.print("Generating Report to file " + OUTPUT_FILE);
 			
 			try {
@@ -289,11 +289,11 @@ public class CalvinNguyen_04 {
 
 			// Format Header
 			
-			output.println("StudentID  FirstName  LastName  Email" + "\n  Grade Items\n" 
-					+ "  GradeItemID  CourseID  Type  Date "
-					+ " Maximum Score   Actual Score    Grade (%)*");
-			output.println("==================================================================================="
-					+ "\n  Total                           SumOfMaxScore   SumActualScore" + "    Grade (%)");
+			output.println("StudentID  FirstName  LastName  Email" + "\n   Grade Items\n" 
+					+ "   GradeItemID  CourseID  Type          Date "
+					+ "           Maximum Score   Actual Score     Grade (%)*");
+			output.println("===================================================================================================="
+					+ "\n        Total                                           SumOfMaxScore   SumActualScore" + "   Grade (%)");
 
 			// Output report
 
@@ -306,7 +306,7 @@ public class CalvinNguyen_04 {
 				if (studentObjects[i] instanceof Student) {            // check if object actually works with student
 					tempStudent = (Student) studentObjects[i];
 
-					output.printf("\n%s    %s    %s   %s\n"
+					output.printf("\n%s  %s        %s       %s\n"
 							,tempStudent.getStudentID(), tempStudent.getFirstName(),
 							tempStudent.getLastName(), tempStudent.getEmail());
 					output.println("   Grade Items");
@@ -318,11 +318,12 @@ public class CalvinNguyen_04 {
 							tempGradeItem = (GradeItem) gradeItemObjects[t];
 
 							if (tempStudent.getStudentID().equals(tempGradeItem.getStudentID())) {
+								double gradePercentage = ((double)tempGradeItem.getActualScore() / tempGradeItem.getMaximumScore()) * 100;
 								
-								output.printf("   %s\t%s\t%-8s\t%4s\t%s\t%s\n",
+								output.printf("   %s\t%13s\t  %-8s\t%4s\t%s\t        %s\t         %.1f%%\n",
 										tempGradeItem.getGradeItemID(), tempGradeItem.getCourse(),
 										tempGradeItem.getItemTypes(),tempGradeItem.getDate(), 
-										tempGradeItem.getMaximumScore(), tempGradeItem.getActualScore());
+										tempGradeItem.getMaximumScore(), tempGradeItem.getActualScore(), gradePercentage);
 								
 								totalMaximumScore += tempGradeItem.getMaximumScore();
 								totalActualScore += tempGradeItem.getActualScore();
@@ -333,9 +334,9 @@ public class CalvinNguyen_04 {
 					
 					double gradePercentage = ((double)totalActualScore / totalMaximumScore) * 100;
 					
-					output.println("======================================================================================");
-					output.printf("\tTotal%38s\t%s\t", totalMaximumScore, totalActualScore);
-					output.printf("%.1f", gradePercentage);
+					output.println("====================================================================================================");
+					output.printf("\tTotal%46s\t%11s\t", totalMaximumScore, totalActualScore);
+					output.printf("         %.1f", gradePercentage);
 					output.print("%");
 					output.println(" ");
 				}
@@ -344,5 +345,5 @@ public class CalvinNguyen_04 {
 			output.close();
 			System.out.print("... done.");
 		
-		}
-	} // End of generateReport method 
+		} // End of generateReport method 
+	} // End of Calvin_Nguyen_04 
