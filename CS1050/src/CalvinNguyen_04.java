@@ -1,14 +1,14 @@
 /**
- *Runs a series of tests to make sure that the Student and GradeItem Class are working properly 
+ *To create a list of student and grade item objects from data acquired from an input file, and to compare and manipulate the data to an external file with the desired format.
  *Calvin Nguyen and Osman Rakhimov
  *list class
  *Eclipse Java IDE
  *insouciant:showing a casual lack of concern; indifferent.
  *"Life begin at the end of your Comfort Zone. So if you`re feeling uncomfortable right now, 
- *	know that the change taking place in your life is a begining, not an ending" - Neale Walsch, (9.1943)
+ *	know that the change taking place in your life is a beginning, not an ending" - Neale Walsch, (9.1943)
  *@author Calvin Nguyen and Osman Rakhimov
  *@version project 4 
- *@class CalvinNguyen_04
+ *@class CalvinNguyen_04 
  */
 
 
@@ -23,8 +23,8 @@ public class CalvinNguyen_04 {
 
 		private static LinkedList<Student> listOfStudents;
 		private static LinkedList<GradeItem> listOfGradeItems;
-		final static String INPUT_FILE = "Project_04_Input02.txt";
-		final static String OUTPUT_FILE = "Project_04_Output02.txt";
+		final static String INPUT_FILE = "Project_04_Input01.txt";
+		final static String OUTPUT_FILE = "Project_04_Output01.txt";
 		private static String[] splitter;
 		private static PrintWriter output; // Output
 		private static Student student; // Student 2
@@ -58,7 +58,7 @@ public class CalvinNguyen_04 {
 		
 		
 		public static void processInput() throws IOException {
-			File INPUT_FILE = new File("Project_04_Input02.txt"); // Importing the file.
+			File INPUT_FILE = new File("Project_04_Input01.txt"); // Importing the file.
 
 			Scanner scan;
 			String t1 = "";
@@ -68,13 +68,16 @@ public class CalvinNguyen_04 {
 				scan = new Scanner(INPUT_FILE);
 				System.err.println("Reading data from file " + INPUT_FILE);
 
-			} catch (FileNotFoundException e) {
+			} 
+			
+			catch (FileNotFoundException e) {
 
 				System.err.println("File not found");
 
 				return;
 
 			}
+			
 			while (scan.hasNextLine()) {                       	 /* Scanner continues scanning even if there is an empty 
 											                       space.*/
 				t1 = scan.nextLine();
@@ -252,9 +255,7 @@ public class CalvinNguyen_04 {
 
 			} //End of else statement
 
-		}
-
-		// End of test 2b method
+		} // End of processGradeItemData method
 
 /************************************************************************************************************/
 		
@@ -267,6 +268,10 @@ public class CalvinNguyen_04 {
 		 */
 		
 		public static void generateReport() throws IOException {
+			int totalMaximumScore = 0;
+			int totalActualScore = 0;
+			int grandTotalMaximumScore = 0;
+			int grandTotalActualScore = 0;
 
 			Student tempStudent = new Student("Number", "First", "last", "email@gmail.com");
 
@@ -276,7 +281,7 @@ public class CalvinNguyen_04 {
 
 			Object[] gradeItemObjects = listOfGradeItems.toArray();
 
-			File OUTPUT_FILE = new File("Project_04_Output02.txt");     // Generates report to output file
+			File OUTPUT_FILE = new File("Project_04_Output01.txt");     // Generates report to output file
 			System.out.print("Generating Report to file " + OUTPUT_FILE);
 			
 			try {
@@ -289,24 +294,24 @@ public class CalvinNguyen_04 {
 
 			// Format Header
 			
-			output.println("StudentID  FirstName  LastName  Email" + "\n   Grade Items\n" 
+			output.println("StudentID  FirstName    LastName      Email" + "\n   Grade Items\n" 
 					+ "   GradeItemID  CourseID  Type          Date "
 					+ "           Maximum Score   Actual Score     Grade (%)*");
-			output.println("===================================================================================================="
-					+ "\n        Total                                           SumOfMaxScore   SumActualScore" + "   Grade (%)");
+			output.println(""
+				+ "===================================================================================================="
+				+ "\n        Total                                           SumOfMaxScore   SumActualScore" 
+				+ "   Grade (%)" + "\n        Grand Total");
 
 			// Output report
 
 			for (int i = 0; i < studentObjects.length; i++) {
 				
-				int totalMaximumScore = 0;
-				int totalActualScore = 0;
 				
 				
 				if (studentObjects[i] instanceof Student) {            // check if object actually works with student
 					tempStudent = (Student) studentObjects[i];
 
-					output.printf("\n%s  %s        %s       %s\n"
+					output.printf("\n%s  %s        %7s        %s\n"
 							,tempStudent.getStudentID(), tempStudent.getFirstName(),
 							tempStudent.getLastName(), tempStudent.getEmail());
 					output.println("   Grade Items");
@@ -318,7 +323,8 @@ public class CalvinNguyen_04 {
 							tempGradeItem = (GradeItem) gradeItemObjects[t];
 
 							if (tempStudent.getStudentID().equals(tempGradeItem.getStudentID())) {
-								double gradePercentage = ((double)tempGradeItem.getActualScore() / tempGradeItem.getMaximumScore()) * 100;
+								double gradePercentage = ((double)tempGradeItem.getActualScore() 
+										/ tempGradeItem.getMaximumScore()) * 100;
 								
 								output.printf("   %s\t%13s\t  %-8s\t%4s\t%s\t        %s\t         %.1f%%\n",
 										tempGradeItem.getGradeItemID(), tempGradeItem.getCourse(),
@@ -329,21 +335,33 @@ public class CalvinNguyen_04 {
 								totalActualScore += tempGradeItem.getActualScore();
 							} // End of if statement
 
-						} // End of if
+						} // End of if statement
+						
 					} // End of for loop
 					
 					double gradePercentage = ((double)totalActualScore / totalMaximumScore) * 100;
 					
-					output.println("====================================================================================================");
+					output.println(""
+					+ "====================================================================================================");
 					output.printf("\tTotal%46s\t%11s\t", totalMaximumScore, totalActualScore);
 					output.printf("         %.1f", gradePercentage);
 					output.print("%");
 					output.println(" ");
+					
 				}
+				grandTotalMaximumScore += totalMaximumScore;
+				grandTotalActualScore += totalActualScore;
 			}
-			
+			double grandGradePercentage = ((double)grandTotalActualScore / grandTotalMaximumScore) * 100;
+			output.printf("\n\tGrand Total%40s\t%11s\t", grandTotalMaximumScore, grandTotalActualScore);
+			output.printf("         %.1f", grandGradePercentage);
+			output.print("%");
+			output.println(" ");
 			output.close();
 			System.out.print("... done.");
 		
 		} // End of generateReport method 
+		
+/************************************************************************************************************/		
+		
 	} // End of Calvin_Nguyen_04 

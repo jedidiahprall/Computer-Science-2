@@ -5,9 +5,9 @@
  *Eclipse Java IDE
  *insouciant:showing a casual lack of concern; indifferent.
  *"Life begin at the end of your Comfort Zone. So if you`re feeling uncomfortable right now, 
- *	know that the change taking place in your life is a begining, not an ending" - Neale Walsch, (9.1943)
+ *	know that the change taking place in your life is a beginning, not an ending" - Neale Walsch, (9.1943)
  *@author Calvin Nguyen and Osman Rakhimov
- *@version project 4 
+ *@version Project 4 
  *@class LinkedList
  */
 
@@ -28,18 +28,18 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
 	  */
 	
 	public boolean add(T newItem) {
-		
-		Node newNode = new Node(newItem);
-		
+		Node<T> newNode = new Node<T>(newItem);
 		newNode.next = head;
 		head = newNode;
 		
 		if (head.equals(newNode)) {
 			numberOfEntries ++;
-		}
+			
+		} // End of if statement
+		
 		return result;
 		
-	}
+	} // End of add method
 	
 //*************************************************************************  
     /**
@@ -70,18 +70,25 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
 				
 				for (int i = 1;i < givenPosition; i++) {
 					currentNode = currentNode.next;
-				}
+					
+				} // End of for loop
 				
 				newNode.next = currentNode.next;
 				currentNode.next = newNode;
 				numberOfEntries++;
-			}// end of if
-		}
+				
+			} // End of if statement
+			
+		} // End of if statement
+		
 		else {
 				throw new IndexOutOfBoundsException("Wrong position given");
-			}
+				
+			} // End of if statement		
+		
 			return result;
-	}
+			
+	} // End of add
 	
  //*************************************************************************
     
@@ -98,6 +105,7 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
         currentNode = head;
         nodeBefore = null;
         nodeAfter = null;
+        
         try{
         if(isEmpty()){
            throw new IllegalArgumentException("List is empty");
@@ -115,24 +123,33 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
                  currentNode = currentNode.getNextNode();
                  nodeAfter = currentNode.getNextNode();
                  
-              }
+              } // End of while loop
+              
               if(currentNode != null){
                  numberOfEntries--;
                  result = true;
                  nodeBefore.setNextNode(nodeAfter);
                  currentNode.setNextNode(null);
-              }
-            }
+                 
+              } // End of if statement
+              
+            } // End of try statement
             catch(NullPointerException e){
               System.err.println("Node is null");
-            }
-         }
-        }
+              
+            } // End of try-catch
+           
+         } // End of if statement
+        
+        } // End of try-catch 
         catch(IllegalArgumentException e){
         System.err.println("No item found in list");
-        }    
+        
+        } // End of try-catch  
+        
         return result;
-	}
+        
+	} // End of remove method
 
 	
 //*************************************************************************
@@ -144,7 +161,8 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
 	public void clear() {
 		head = null;
 		numberOfEntries = 0;
-	}
+		
+	} // End of clear method
 	
 //*************************************************************************
 	
@@ -157,12 +175,16 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
 	public int getCurrentSize() { 
 		Node <T> current = head;
 		int listCount=0;
+		
     	while (current.next != null) {
     		listCount +=1;
-    		current = current.next;		
-    	}
+    		current = current.next;	
+    		
+    	} // End of while loop
+    	
     	return listCount;
-    }
+    	
+    } // End of getCurrentSize method
 	
 //*************************************************************************  
     
@@ -172,14 +194,17 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
      * @return True if the collection is empty, or false if not.
      */
 	
-	public boolean isEmpty() { //this
+	public boolean isEmpty() { 
 		result = false;
 		
 		if(numberOfEntries==0) {
 			result = true;
-		}
+			
+		} // End of if statement
+		
 		return result;
-	}// end of empty
+		
+	}// End of isEmpty method
 	
 //*************************************************************************     
     /**
@@ -189,18 +214,23 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
      * @return The number of times anEntry appears in the collection.
      */
 	
-	public int getFrequencyOf(T anEntry) { //this
+	public int getFrequencyOf(T anEntry) { 
 		Node<T> currentNode = new Node<T> (anEntry);
 		int listCount=0;
+		
 		for(int i = 0; i<= numberOfEntries; i++) {
 			if(anEntry.equals(currentNode.getData())) {
 				listCount++;
-			}
+				
+			} // End of if statement
+			
 			currentNode = currentNode.getNextNode();
 			
-		}
+		} // End of for loop
+		
 		return listCount;
-	}
+		
+	} // End of getFrequecncyOf method
 
 //************************************************************************* 
     
@@ -212,9 +242,7 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
      */
 	
 	public boolean contains(T anEntry) {
-		
 		result = false;
-		
 		Node<T> currentNode = head;
 		
 		while(!result && (currentNode != null)) {
@@ -223,12 +251,15 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
 			}
 			else {
 				currentNode = currentNode.getNextNode();
-			}// end of if
+				
+			}// End of if statement
 			
 						
-		}// end of while
+		} // End of while loop
+		
 		return result;
-	}// end of contains
+		
+	} // End of contains method
 
 //************************************************************************* 
 	   
@@ -240,15 +271,18 @@ public class LinkedList<T> implements MyCollectionInterfaceProject04<T> {
      */
 	
 	public Object[] toArray() {
-		Object[] thing =  new Object[numberOfEntries];
-	      int index = 0;
-	      Node<T> currentNode = head;
-	      while((index < numberOfEntries) && (currentNode != null)){
-	         thing[index] = currentNode.getData();
-	         currentNode = currentNode.getNextNode();
-	         index++;
-	      }
-	      return thing;   
+		Object[] array =  new Object[numberOfEntries];
+	    int index = 0;
+	    Node<T> currentNode = head;
+	      
+	    while((index < numberOfEntries) && (currentNode != null)){
+	        array[index] = currentNode.getData();
+	        currentNode = currentNode.getNextNode();
+	        index++;
+	         
+	      } // End of while loop 
+	      
+	      return array;   
 	    
 	    } // End of method
 	
