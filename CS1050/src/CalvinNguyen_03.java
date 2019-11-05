@@ -308,8 +308,10 @@ public class CalvinNguyen_03 {
 				tempStudent = (Student) studentObjects[i];
 
 				output.printf("\n%s    %s    %s   %s\n"
+						
 						,tempStudent.getStudentID(), tempStudent.getFirstName(),
 						tempStudent.getLastName(), tempStudent.getEmail());
+				
 				output.println("   Grade Items");
 
 				for (int t = 0; t < gradeItemObjects.length; t++) {
@@ -327,9 +329,11 @@ public class CalvinNguyen_03 {
 							
 							totalMaximumScore += tempGradeItem.getMaximumScore();
 							totalActualScore += tempGradeItem.getActualScore();
+							
 						} // End of if statement
 
 					} // End of if
+					
 				} // End of for loop
 				
 				double gradePercentage = ((double)totalActualScore / totalMaximumScore) * 100;
