@@ -109,7 +109,7 @@ public class CalvinNguyen_05 {
 							stack.pop();
 		            } // End if			 
 						else {
-							System.err.print("fjaklsdj");
+							System.err.print("not complete");
 		            } // End else
 					} // End if
 					else // an operator is encountered 
