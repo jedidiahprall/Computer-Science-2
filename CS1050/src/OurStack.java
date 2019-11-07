@@ -10,6 +10,9 @@ public class OurStack<T> implements StackInterface<T> {
 	private static final int MAX_CAPACITY = 10000;
 	
    //*************************************************************************
+	/**
+	 * Creates a new stack
+	 */
 	
    public OurStack() {
 		@SuppressWarnings("unchecked")
@@ -20,7 +23,11 @@ public class OurStack<T> implements StackInterface<T> {
 	} // end default constructor
 	
    //*************************************************************************
-	
+   /**
+    * Creates a stack that already has a capacity
+	 *@param initial Capacity 
+	 */
+   
    public OurStack(int initialCapacity) {
 		@SuppressWarnings("unchecked")
 		T[] tempStack = (T[])new Object[initialCapacity];
@@ -30,10 +37,11 @@ public class OurStack<T> implements StackInterface<T> {
 	} // end constructor
 	
    //*************************************************************************
-	
-	/**
-	 * @param newEntry
+   /**
+	 * Adds a new entry to the top of this stack.
+	 * @param newEntry object to add to stack.
 	 */
+   
 	public void push(T newEntry) {
 		
 		stack[topIndex + 1] = newEntry;
@@ -41,10 +49,12 @@ public class OurStack<T> implements StackInterface<T> {
 	} // end push
 
 	//*************************************************************************
-	
 	/**
-	 * @return
+	 * Removes and returns this stack's top entry.
+	 * @return either object at top of stack or, if stack is empty
+	 * 	stack is empty before operation, null
 	 */
+	
 	public T pop() {
 		
 		if(isEmpty()) {
@@ -59,7 +69,8 @@ public class OurStack<T> implements StackInterface<T> {
 	} // end pop
 	//*************************************************************************
 	/**
-	 * @return
+	 * Detects whether this stack is empty.
+	 * @return true if the stack is empty.
 	 */
 	public T peek() {
 		if(isEmpty()) {
@@ -71,14 +82,15 @@ public class OurStack<T> implements StackInterface<T> {
 	} // end peek
 	//*************************************************************************
 	/**
-	 * @return
+	 * Detects whether this stack is empty.
+	 * @return true if the stack is empty
 	 */
 	public boolean isEmpty() {
 		return topIndex < 1;
 	} // end isEmpty
 	//*************************************************************************
 	/**
-	 * @return
+	 * Removes all entries from this stack.
 	 */
 	public void clear() {
 		topIndex = 0;

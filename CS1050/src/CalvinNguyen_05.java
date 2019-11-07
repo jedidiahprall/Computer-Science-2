@@ -105,11 +105,11 @@ public class CalvinNguyen_05 {
 						while (!stack.isEmpty() && stack.peek() != '(') {
 							result += stack.pop(); 
 						} // End while
-						if (!stack.isEmpty() && stack.peek() == '(') {
-							stack.pop();
+						if (!stack.isEmpty() && stack.peek() != '(') {
+							return "Invalid Expression";
 		            } // End if			 
 						else {
-							System.err.print("not complete");
+							stack.pop(); 
 		            } // End else
 					} // End if
 					else // an operator is encountered 
@@ -122,12 +122,11 @@ public class CalvinNguyen_05 {
 		            
 					} 
 		         
-//		         if (variableCount > 1) {
-//		           stack.clear();
-//		           throw new IllegalArgumentException("None. Invalid syntax.");
-//		           
-//		         }
-		       
+		         if (variableCount > 1) {
+		           stack.clear();
+		           throw new IllegalArgumentException("None. Invalid syntax.");
+		           
+		         }
 
 			
 				} // End for 
@@ -140,7 +139,6 @@ public class CalvinNguyen_05 {
 			
 				return result; 
 			} 
-		
 		
 //		String result = "";
 //		OurStack<Character> stack = new OurStack<>();
