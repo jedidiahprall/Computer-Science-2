@@ -1,7 +1,7 @@
 /**
  *Java implementation to convert infix expression to postfix using stack class
  *Jedidiah Prall and Calvin Nguyen 
- *ourStack Class
+ *Postfix Class
  *Eclipse Java IDE
  *Quixotic: Exceedingly idealistic; unrealistic and impractical.
  *"Don’t ruin a good day today by thinking about a bad yesterday. Let it go." — Grant Cardone, (3.1958) 
@@ -10,17 +10,16 @@
  *@class JedidiahPrall_CalvinNguyen_05
  */
 
-public class Postfix 
-{ 
+public class Postfix { 
+	
 /************************************************************************************************************/	
 	/** 
-	 * Checks second position of the array for "ADD", If valid will store references in student2 and will 
-	 * A utility function to return precedence of a given operator with a higher returned value means higher precedence 
+	 * A utility function to return precedence of a given operator with a higher returned value
+	 * means higher precedence
+	 * @param ch is the operator character
 	 */
-	public static void Postfix() {
-   }
-   
-   static int Prec(char ch) 
+	
+	static int precedence(char ch) 
 	{ 
 		switch (ch) 
 		{ 
@@ -39,10 +38,14 @@ public class Postfix
 	} 
    
  /************************************************************************************************************/	 
-	/** 
+   
+   // Start of convertToPostfix
+   
+   /** 
 	 * Method that converts given infix expression to postfix expression
 	 * @param inputExpression is the infix expression
 	 */
+   
 	public static String convertToPostfix(String inputExpression) throws IllegalArgumentException 
 	{ 
 		// initializing empty String for result 
@@ -88,7 +91,7 @@ public class Postfix
 			} // End of if
 			else // an operator is encountered 
 			{ 
-				while (!stack.isEmpty() && Prec(c) <= Prec(stack.peek())) {
+				while (!stack.isEmpty() && precedence(c) <= precedence(stack.peek())) {
 					result += stack.pop();
             } // End of while
 				   stack.push(c); 
@@ -116,15 +119,26 @@ public class Postfix
         
         if (balance == false) {
                 throw new IllegalArgumentException("  None Invalid Syntax." +
-                                            " Missing Close Parentheses.");
+                                            " (Missing Close Parentheses)");
         }
             
 		return result; 
-	} 
-        
-        public static boolean checkBalance(String expression) {
 		
-		StackInterface<Character> openDelimiterStack = new OurStack<Character>();
+	} // End of convertToPostfix
+	
+/************************************************************************************************************/	 
+	// Start of checkBalance
+	
+	/** 
+	 * Method to check the balanced parentheses for infix expression.
+	 * @param expression is the infix expression.
+	 * @return Returns true if the expression has balanced parentheses and will return
+	 * false if the expression has unbalanced parentheses. 
+	 */      
+	
+     public static boolean checkBalance(String expression) {
+
+		StackInterface<Character> opEndelimiterStack = new OurStack<Character>();
 		
 		char nextCharacter;
 		int characterCount = expression.length();
@@ -137,50 +151,62 @@ public class Postfix
 			switch (nextCharacter) {
 				case '(': case '[': case '{':
 				// Push nextCharacter on stack
-				openDelimiterStack.push(nextCharacter);
+				opEndelimiterStack.push(nextCharacter);
 				break;
 				case')': case ']': case '}':
-					if (openDelimiterStack.isEmpty()) { // if stack is empty
+					if (opEndelimiterStack.isEmpty()) { // if stack is empty
 					isBalanced = false;
 					} 
 					else {
-						char openDelimiter = openDelimiterStack.pop();
-						//true or false according to whether openDelimiter and
+						char opEndelimiter = opEndelimiterStack.pop();
+						//true or false according to whether opEndelimiter and
 						// nextCharacter are a pair of delimiters
-						isBalanced = isPaired(openDelimiter, nextCharacter);
+						isBalanced = isPaired(opEndelimiter, nextCharacter);
 					
-					} // end if
+					} // End if
 					break;
 					default:
 					break;
-				} // end switch
+					
+				} // End switch
+			
 			index++;
-		} // end while
-		if (!openDelimiterStack.isEmpty()) { // stack is not empty
+			
+		} // End while
+		
+		if (!opEndelimiterStack.isEmpty()) { // stack is not empty
 			isBalanced = false;
-			//return isBalanced;
-		} // end if
+			
+		} // End if
             return isBalanced;
-	} // end checkBalance
+            
+	} // End checkBalance
+        
+/************************************************************************************************************/	 
 	
-	/**
-	 * Returns true if the given characters, open and close,
+     // Start of isPaired
+     
+     /**
+	 * Method to check if there the expression form a pair of parentheses
+	 * @param open is the open parentheses 
+	 * @param close is the close parentheses
+	 * @return Returns true if the given characters, open and close,
 	 * form a pair of parentheses, brackets, or braces.
-	 * @param open
-	 * @param close
-	 * @return
 	 */
+     
 	private static boolean isPaired(char open, char close) {
 		return  (open == '(' && close == ')') ||
 				(open == '[' && close == ']') ||
 				(open == '{' && close == '}'); 
-	} // end isPaired
+		
+	} // End isPaired
 
+/************************************************************************************************************/	 
+
+	// Start of main
 	
-	// Driver method 
 	public static void main(String[] args) 
 	{ 
-		//String exp = "( a +b   * c^ d ) ^( e* f- g  h)"; 
-		//System.out.println(convertToPostfix(exp)); 
-	}
-}  
+	}// End of main
+	
+}  // End of Postfix

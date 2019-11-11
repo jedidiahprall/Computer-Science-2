@@ -9,6 +9,7 @@
  *@version Project 5
  *@class JedidiahPrall_CalvinNguyen_05
  */
+
 import java.io.*;
 import java.util.EmptyStackException;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ public class JedidiahPrall_CalvinNguyen_05 {
                String infix = scnr.nextLine();
                System.out.printf("\n%-44s", infix);
                System.out.printf("  %s", p.convertToPostfix(infix));
-            } // End of try
+            } // End of try 
             
             catch (Exception e) {
                System.err.println(e.getMessage());
