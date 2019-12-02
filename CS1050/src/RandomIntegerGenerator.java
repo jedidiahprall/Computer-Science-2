@@ -21,7 +21,7 @@ public class RandomIntegerGenerator {
    
       int defaultNumNumbers  = 100;    // Default # of random #s to generate
       int defaultMaxNumber = 10000;    // Default Maximum number to generate + 1
-      final String defaultFileName = "2050 Project 06_Input.txt";
+      final String defaultFileName = "Project_06_Input.txt";
                                        // Default file name
       final String OUTPUT_FILE;        // Name of output file supplied below
       final int NUM_NUMBERS;           // # of random #s to generate

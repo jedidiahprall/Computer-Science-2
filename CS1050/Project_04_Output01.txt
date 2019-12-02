@@ -5,20 +5,4 @@ StudentID  FirstName    LastName      Email
         Total                                           SumOfMaxScore   SumActualScore   Grade (%)
         Grand Total
 
-900123457  Joe            Doe        joedoe@msudenver.edu 
-   Grade Items
-   3	        23456	  Test    	20190112	500	        345	         69.0%
-   2	        23456	  Class Work	20190112	100	        95	         95.0%
-   1	        23456	  HW      	20190113	100	        75	         75.0%
-====================================================================================================
-	Total                                           700	        515	         73.6% 
-
-900123451   Mary          Smith        marysmith@msudenver.edu
-   Grade Items
-   3	        12346	  Test    	20190112	500	        345	         69.0%
-   2	        12346	  Class Work	20190112	100	        75	         75.0%
-   1	        12346	  HW      	20190112	100	        95	         95.0%
-====================================================================================================
-	Total                                          1400	       1030	         73.6% 
-
-	Grand Total                                    2100	       1545	         73.6% 
+	Grand Total                                       0	          0	         NaN% 
