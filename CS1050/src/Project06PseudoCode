@@ -1,0 +1,53 @@
+Pseudo Code for CalvinNguyen_JedidiahPrall_06
+
+Start of code begin with Class CalvinNguyen_JedidiahPrall_06,
+
+Define relevant variables.
+
+Start of Main Method
+Declares relevant variables 
+calls the method listed below.
+
+Start of Process input method,
+
+define two arrays, length 100,
+one array for Shell sort one for quick sort
+
+read input file once, 
+
+write input file to shell sort
+write shellsort to quick sort
+
+close input file
+
+call methods to sort each array.
+
+End processInput
+
+start of shell sort method
+
+method will be written to sort the array from least to greatest 
+
+end shellSort
+
+Start of Quick Sort method
+
+Quick sort method will be written to 
+sort the array from least to greatest
+
+End quickSort
+
+Generat report method
+
+will open an output file
+
+Method will print out the results of the sorted arrays in lines that 
+contain ten numbers per line, separated by commas. 
+
+It will print out the shell sort first then quick sort. 
+
+then close output file
+End Generate report
+
+End Main
+End CalvinNguyen_JedidiahPrall_06
